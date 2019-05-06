@@ -1,0 +1,182 @@
+body,html {
+  font-family: 'Lato', sans-serif;
+  background-color: #f4f4f4;
+  overflow-x: hidden;
+  margin: 0;
+}
+.container {
+  margin: auto;
+}
+
+/* NAVIGATION */
+
+
+/* .navbar {
+  background-color: #3b5998;
+  overflow: hidden;
+  height: 200px; 
+} */
+
+.navbar a {
+  /* float: left; */
+  display: block;
+  /* color: #f2f2f2; */
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 1rem;
+}
+#navbar-desktop a {
+  color: #000;
+  text-decoration: none;
+}
+
+#navbar-desktop ul {
+  margin: 0;
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+#navbar-desktop li {
+  display: inline;
+  margin: 0px 10px 0 10px;
+  padding: 0 10px 0 10px;
+}
+
+#navbar-desktop a:hover {
+  background-color: #ddd;
+  color: #000;
+}
+/*In side nav*/
+
+
+/* .branding-lg {
+  flex: 4;
+}
+nav#navbar-desktop {
+  flex: 3;
+}
+.search-bar {
+  flex: 3;
+}
+.shop-cart {
+  flex: 2;
+} */
+/* Search Bar */
+input.search-bar {
+  background-color: #f5f8fa;
+  border: 1px solid #e6ecf0;
+  line-height: 16px;
+  border-radius: 40px;
+  padding: 8px 32px 8px 12px;
+  transition: all .2s ease-in-out;
+}
+input[type="text"] {
+  font-family: "Avenir Next", "Avenir", sans-serif;
+  font-size: 15px;
+}
+/* i.fas.fa-search {
+  position: relative;
+  top: 4px;
+  right: 40px;
+} */
+
+
+
+
+.side-nav {
+  height: 100%;
+  width: 0; /*inital value to none*/
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  opacity: 0.9;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+}
+
+.side-nav a {
+  padding: 10px 10px 10px 30px;
+  text-decoration: none;
+  font-size: 1rem;
+  color: #ccc;
+  display: block;
+  transition: 0.3s; 
+}
+
+.side-nav a:hover {
+  color: #FFF;
+}
+
+.side-nav .btn-close {
+  position: absolute;
+  top: 0;
+  right: 22px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.product-image {
+  border: 1px solid #000;
+}
+#showcase img {
+  width: 100%;
+  height: auto;
+}
+button.add_to_cart {
+  height: 38px;
+  background-color: #E8491D;
+  border: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #FFF;
+}
+button.quanity-button {
+  height: 38px;
+  background-color: blue;
+  border: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #FFF;
+}
+/* PAGINATION */
+
+
+.pagination-section ul {
+  list-style: none;
+}
+.pagination-section a {
+  text-decoration: none;
+  color: #000;
+}
+.pagination-section li {
+  display: inline;
+}
+
+
+@media(max-width:568px) {
+  nav#navbar-desktop {display: none}
+  .search-bar {display: none}
+  .shop-cart {display: none}
+  .branding-lg {display: none}
+}
+
+@media(min-width:568px) { 
+  .open-slide {display: none}
+  /* .row {display: flex} */
+  /* .container {margin: 0px 100px 0px 100px} */
+  #main-header {border-bottom: 1px solid #000}  
+}
+
+
+/* 
+Set inital value of side cart to none 
+
+position fixed
+z-index: 1;
+top: 0;
+left: 0;
+*/
