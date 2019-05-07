@@ -119,9 +119,10 @@ input[type="text"] {
   margin-left: 50px;
 }
 
-.product-image {
+/* .product-image {
   border: 1px solid #000;
-}
+} */
+
 #showcase img {
   width: 100%;
   height: auto;
