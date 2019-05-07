@@ -4,18 +4,15 @@ body,html {
   overflow-x: hidden;
   margin: 0;
 }
-.container {
-  margin: auto;
+h1 {
+  margin: 0;
 }
+/* .container {
+  margin: auto;
+} */
 
 /* NAVIGATION */
 
-
-/* .navbar {
-  background-color: #3b5998;
-  overflow: hidden;
-  height: 200px; 
-} */
 
 .navbar a {
   /* float: left; */
@@ -119,9 +116,9 @@ input[type="text"] {
   margin-left: 50px;
 }
 
-/* .product-image {
-  border: 1px solid #000;
-} */
+.product-image {
+  /* border: 1px solid #000; */
+}
 
 #showcase img {
   width: 100%;
@@ -169,7 +166,10 @@ button.quanity-button {
   .open-slide {display: none}
   /* .row {display: flex} */
   /* .container {margin: 0px 100px 0px 100px} */
-  #main-header {border-bottom: 1px solid #000}  
+  #main-header {
+    /* border-bottom: 1px solid #000; */
+    padding-top: 4rem;
+  }  
 }
 
 
