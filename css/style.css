@@ -13,7 +13,6 @@ h1 {
 
 /* NAVIGATION */
 
-
 .navbar a {
   /* float: left; */
   display: block;
@@ -41,9 +40,15 @@ h1 {
 }
 
 #navbar-desktop a:hover {
-  background-color: #ddd;
+  /* background-color: #ddd; */
   color: #000;
 }
+#navbar-desktop .current a {
+  color: #E8491D;
+}
+
+
+
 /*In side nav*/
 
 
@@ -72,14 +77,14 @@ input[type="text"] {
   font-family: "Avenir Next", "Avenir", sans-serif;
   font-size: 15px;
 }
-/* i.fas.fa-search {
+
+i.fas.fa-search {
   position: relative;
-  top: 4px;
-  right: 40px;
-} */
-
-
-
+  top: 0px;
+  bottom: 0;
+  left: -24px;
+  right: 0px;
+}
 
 .side-nav {
   height: 100%;
@@ -104,8 +109,11 @@ input[type="text"] {
   transition: 0.3s; 
 }
 
-.side-nav a:hover {
+/* .side-nav a:hover {
   color: #FFF;
+} */
+a.current {
+  color: #E8491D;  
 }
 
 .side-nav .btn-close {
@@ -117,7 +125,7 @@ input[type="text"] {
 }
 
 .product-image {
-  /* border: 1px solid #000; */
+  border: 1px solid #000;
 }
 
 #showcase img {

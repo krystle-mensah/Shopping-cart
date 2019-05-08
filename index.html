@@ -26,17 +26,15 @@
           <div class="col-lg-3">
             <nav id="navbar-desktop">
               <ul>
-                <li><a href='#'>About</a></li>
-                <li><a href='#'>Shop</a></li>
+                <li><a href="#">About</a></li>
+                <li class="current"><a href="#">Shop</a></li>
               </ul>
             </nav> <!-- navbar-->
           </div> <!-- col -->
           <div class="col-lg-3">
-          <!--search bar -->
-            <div class="search-bar"> 
-              <input type="text" placeholder="search">
-              <i class="fas fa-search"></i>
-            </div> <!-- search-bar -->
+          <!--search bar -->  
+            <input type="text" placeholder="search">
+            <i class="fas fa-search"></i>
           </div> <!-- col -->
           <div class="col-lg-3">
             <!-- shopping cart and total -->
@@ -109,6 +107,15 @@
     </div> <!-- container-fluid -->
 
   </section> <!-- showcase -->
+  <!-- Shopping cart -->
+  <section id="shopping-cart">
+    <div class="container-fluid">
+        
+        <div class="row center-xs center-sm center-md center-lg">
+        
+        </div><!-- row -->
+    </div> <!-- container-fluid -->
+  </section> <!-- shopping-cart -->
 
   <section class="pagination-section">
     <div class="container-fluid">
@@ -140,7 +147,7 @@
   <div id="side-menu" class="side-nav"> 
     <a href="#" class="btn-close" onClick="closeSlideMenu()">&times;</a>
     <a href="#">About</a>
-    <a href="#">Shop</a>
+    <a class="current" href="#">Shop</a>
   </div> <!-- #side-menu .side-nav -->
   
   <script src="js/responsive.js"></script>
