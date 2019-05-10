@@ -25,6 +25,10 @@ html, body {
 	text-decoration: none;
 }
 
+.nav .current a {
+	color: #56CCF2;
+} 
+
 .main-nav {
 	text-align: center;
 	font-size: 1.1em;
@@ -220,7 +224,9 @@ input[type="text"] {
 }
 
 .shop-item-image {
-	height: 250px;
+	/* height: 250px; */
+	max-width: 100%;
+  height: auto;
 }
 
 .shop-item-details {
