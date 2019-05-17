@@ -6,35 +6,43 @@ if (document.readyState == 'loading') {
 
 function ready() {
 
-  // Remove Item from cart
+  // Variable to removeCartItemButtons set to element class "btn-danger" 
   var removeCartItemButtons = document.getElementsByClassName("btn-danger");
-  // check variable
-  console.log(removeCartItemButtons);
-
-  // We need to create a loop to loop through items. 
+  // Next we loop through variable removeCartItemButtons set to element class "btn-danger" with var i.  
+  
+  // loop through removeCartItemButtons varible with variable i. 
   for (var i = 0; i < removeCartItemButtons.length; i++){
+    // Next we need to save whatever element class is pressed with variable button. 
+    
     var button = removeCartItemButtons[i]
+    // Next we need to set up a click event on variable button because this varible represents the specific button being
+    // Pressed.  
     button.addEventListener('click', removeCartItem) 
   }
+  // We grap all elements with a class of cart-quanity-input and hold them in a variable called quantityInputs.  
 
-  // When was change inside of the quanity it well update our total. 
-  // Stop number's being inputted below 0
   var quantityInputs = document.getElementsByClassName('cart-quanity-input');
-  // Loop through cart quanity input.
+  // Next loop through quantityInputs with variable i
+  
   for (var i = 0; i < quantityInputs.length; i++) {
+    // Inside the loop we need to grap on to one 'cart-quanity-input' element and hold it in a varible.
+
     var input = quantityInputs[i]
-    // anytime the input changes in value
+    
     input.addEventListener('change', quantityChanged) 
   }
   
-  // we create variable to hold the element class for buttons 
+  // we create variable to hold all elements with a class of 'shop-item-button'.  
+  
   var addToCartButtons = document.getElementsByClassName('shop-item-button');
-  // We loop through all the elements with a class shop-item-button with i variable
+  
+  // For all addToCartButtons, loop through how many there them with i variable. 
   for (var i = 0; i < addToCartButtons.length; i++) {
-    // Then we create another variable for ONE button. 
-    //and set it to addToCartButtons and variable i 
+    // Inside the loop we need to grap on to one 'shop-item-button' element and hold it in a variable.
+    
     var button = addToCartButtons[i];
-    // Then we add an event to button variable. A click event and the function name. 
+    // Then we add an event to that variable. So when it is clicked the event runs and the function addToCartClicked.
+   
     button.addEventListener('click', addToCartClicked) 
   }
 }
@@ -45,6 +53,7 @@ function removeCartItem(event){
   updateCartTotal()
 }
 
+// What we wont to do when our quantity is changed. 
 function quantityChanged(event) {
   // What we wont to do when our quantity is changed
   // First we get the quantity element and set it to the element we need 
@@ -57,22 +66,61 @@ function quantityChanged(event) {
   }
   // Then we wont to update the total inside out cart
   updateCartTotal();
-
 }
 
 function addToCartClicked(event) {
   var button = event.target
-  // When the above event happens we need the image, name, price, quantity and the removel button 
-  // Quantity is always going to be 1. The remove button is always going to be the remove button.
+  //var shopItem = document.getElementsByClassName('shop-item');
   
-  // The shop-item-button class is inside the shop-item-details Div element. 
+   
   // The shop-items Div element class is right above it. 
 
-  // What we need to do is create a variable called shopItem.
-  // Set it to the ONE button.  
+  // First create a variable called shopItem. 
+  // And the shop-item-button class which is inside the shop-item-details Div element. 
+  // Set it to the variable button along with.  
+  var shopItem = button.parentElement.parentElement
+  // variable to get the element 'shop-item-title' and the first one with the text.   
+  var title = shopItem.getElementsByClassName('shop-item-title')[0].innerText
+  var price = shopItem.getElementsByClassName('shop-item-price')[0].innerText
+  // Next we wont image source of our "shop-item" class. 
   
-  var shopItem = button.parentElement.parentElement 
+  var imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src
 }
+
+
+function addItemToCart(title, price, imageSrc) {
+  // Next we need to create a cart row.
+
+  // First we store cartRow into a variable. Then we set it to a new element which we will add to our html later. 
+  
+  var cartRow = document.createElement('div');
+  // Next we wont to add this new element to the "cart-items" class. The first array
+  
+  cartRow.classList.add('cart-row');
+  
+  // We hold the "cart-items" class element in a variable called cartItems
+  var cartItems = document.getElementsByClassName('cart-items')[0];
+  // This is the content of our cartRow variable. 
+  
+  // First we store the contents in a variable and set it to a string. 
+  var cartRowContents = ` 
+    <div class="cart-item cart-column">
+      <img class="cart-item-image" src="img/bbq-crunch.jpg"></img>
+      <span class="cart-item-title">Bbq crunch</span>
+    </div>
+    <span class="cart-price cart-column">£1.99</span>
+    <div class="cart-quantity cart-column"> 
+      <input class="cart-quantity-input" type="number" value="1"></input>
+      <button class="btn btn-danger" type="button">REMOVE</button>
+    </div> `
+  cartRow.innerHTML = cartRowContents 
+
+  // Next we add the cartItems variable to the CartRow variable
+  cartItems.append(cartRow);
+  
+
+}
+
 
 // We really need it the price, name and image from our item
 
