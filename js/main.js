@@ -1,12 +1,18 @@
-// if (document.readyState == 'loading') {
-//   document.addEventListener('DOMContentLoaded', ready)
-// } else {
-//   ready();
-// }
+// We need to check IF the page is done loading
 
+// if the document, the ready state is still loading
+if (document.readyState == 'loading') {
+  // what was want to do is add an event listerner to the document. 
+  // This event well fire as soon as the page is done loading. 
+  document.addEventListener('DOMContentLoaded', ready)
+  // and if it is already done loading
+} else {
+  ready();
+}
+
+function ready() {
   // removeCartItemButtons set to all elements with the class of "btn-danger" 
-  var removeCartItemButtons = document.getElementsByClassName("btn-danger");
-  //console.log(removeCartItemButtons);
+  var removeCartItemButtons = document.getElementsByClassName("btn-danger"); //console.log(removeCartItemButtons);
   
   //For every removeCartItemButtons length loop through them with var i.  
   for (var i = 0; i < removeCartItemButtons.length; i++){
@@ -16,36 +22,18 @@
     // Next we need to set up a click event on that variable. Just the click motion.
     // The event listerner always returns an event object.
     // The event object is inside of the function being called
+    button.addEventListener('click', removeCartItem)
+  }  
 
-
-    button.addEventListener('click', function(event){
-      // This event object has a property called target.
-      // The event.target is esentailly what ever button we clicked on.
-      // Next we hold that in a varible called buttonClicked
-      // What we wont to do is get that cart row that button is inside.     
-      var buttonClicked = event.target
-      // we take our buttonClicked and the divison is is in <div class="cart-quantity cart-column">.
-      // Then we grap that the hole row element <div class="cart-row"> then the remove function. 
-      buttonClicked.parentElement.parentElement.remove()
-      // Now we call updateCartTotal 
-      updateCartTotal();
-    });
-  }
-  
-  // We grap all elements with a class of cart-quanity-input and hold them in a variable called quantityInputs.  
-
-  var quantityInputs = document.getElementsByClassName('cart-quanity-input');
-  //  Next for every quantityInputs we loop through them with var i.
+  var quantityInputs = document.getElementsByClassName('cart-quantity-input'); //console.log(quantityInputs);
+  // For every quantityInputs we loop through them with var i.
   
   for (var i = 0; i < quantityInputs.length; i++) {
-    // Inside the loop we need to grap on to one 'cart-quanity-input' element and hold it in a varible.
-
+    // Inside the loop we need to grap on to one 'cart-quantity-input' element and hold it in a varible.
     var input = quantityInputs[i]
-    // Next we need to set up a 'change' event on that variable.... 
-    
+    // Next we need to set up a 'change' event on that variable anytime the input changes
     input.addEventListener('change', quantityChanged) 
   }
-  // addToCartButtons set to all elements with the class of 'shop-item-button'  
   
   var addToCartButtons = document.getElementsByClassName('shop-item-button');
   // For all addToCartButtons, loop through how many there them with i variable.
@@ -58,14 +46,19 @@
    
     button.addEventListener('click', addToCartClicked) 
   }
-
-
-// function removeCartItem(event) {
-//   var buttonClicked = event.target
-//   buttonClicked.parentElement.parentElement.remove()
-//   updateCartTotal()
-// }
-
+}
+function removeCartItem(event) {
+  // This event object has a property called target.
+  // The event.target is esentailly what ever button we clicked on.
+  // Next we hold that in a varible called buttonClicked
+  // What we wont to do is get that cart row that button is inside.     
+  var buttonClicked = event.target
+  // we take our buttonClicked and the divison is is in <div class="cart-quantity cart-column">.
+  // Then we grap that the hole row element <div class="cart-row"> then the remove function. 
+  buttonClicked.parentElement.parentElement.remove()
+  // Now we call updateCartTotal 
+  updateCartTotal();
+}
 // What we wont to do when our quantity is changed. 
 function quantityChanged(event) {
   // What we wont to do when our quantity has changed
@@ -74,7 +67,7 @@ function quantityChanged(event) {
   // Then we wont to check to see if the value inside the input is a valued value
   
   // First we check if it is a number and if the number is 1 or higher
-  if (isNaN(input.value) || input.value <= 0 ) {
+  if (isNaN(input.value) || input.value <= 0) {
     // if so we wont to set our input value to 1
     
     input.value = 1 
@@ -92,8 +85,9 @@ function addToCartClicked(event) {
   // Set it to the variable button along with.  
   var shopItem = button.parentElement.parentElement
   
-  var title = shopItem.getElementsByClassName('shop-item-title')[0].innerText
+  var title = shopItem.getElementsByClassName('shop-item-title')[0].innerText //console.log(title);
   var price = shopItem.getElementsByClassName('shop-item-price')[0].innerText
+  console.log(price);
   var imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src
   
   addItemToCart(title, price, imageSrc)
@@ -140,25 +134,26 @@ function addItemToCart(title, price, imageSrc) {
 // But we only want to get the first element in array
 
 function updateCartTotal() {
-  var cartItemContainer = document.getElementsByClassName('cart-items')[0]
+  var cartItemContainer = document.getElementsByClassName('cart-items')[0] //console.log(cartItemContainer);
   // Inside of that cartItemContainer we want to get element by class name 'cart-row'
   // Using getElementsByClassName on an object cartItemContainer well only get the elements inside of that object that 
   // have this differant class then we set it to a varible 'cartRows'   
-  var cartRows = cartItemContainer.getElementsByClassName('cart-row')
+  var cartRows = cartItemContainer.getElementsByClassName('cart-row') //console.log(cartRows);
   var total = 0;
-  
   for (var i = 0; i < cartRows.length; i++){
     var cartRow = cartRows[i]
-    var priceElement = cartRow.getElementsByClassName('cart-price')[0]
-    var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
-    var price = parseFloat(priceElement.innerText.replace('$',''))
-    var quantity = quantityElement.value
-    total = total + (price * quantity)
+    var priceElement = cartRow.getElementsByClassName('cart-price')[0] // console.log(priceElement);
+    var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0] //console.log(quantityElement);
+    // The actaul price text with the pound sign replace with empty string so we can do math on it. 
+    var price = parseFloat(priceElement.innerText.replace('£','')) // console.log(price);
+    // Value of input element. 
+    var quantity = quantityElement.value //console.log(quantity);
+    total = total + (price * quantity) //console.log(price * quantity);
   }
   total = Math.round(total * 100) / 100 
   document.getElementsByClassName('cart-total-price')[0].innerText = '£' + total 
 }
-console.log(priceElement, quanityElement);
+
 
 
  
