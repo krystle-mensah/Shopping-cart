@@ -7,7 +7,10 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 		<link rel="stylesheet" href="css/style.css" />
-		<!-- <script src="store.js" async></script> -->
+<!-- The async attribute tells the browser in order to down load this page in the background and continue downloading
+the body at the same time. 
+-->
+		<script src="js/main.js" async></script>
 	</head>
 	<body>
 		<header class="main-header">
@@ -73,20 +76,42 @@
 				<span class="cart-price cart-header cart-column">PRICE</span>
 				<span class="cart-quantity cart-header cart-column">QUANTITY</span>
 			</div>
-			<!-- CART ITEMS-->
 			<div class="cart-items">
-				<div class="cart-row">
-					
-				</div> <!-- cart-row -->
-				
-			</div><!-- cart-items -->
+			<!-- delete when everything is working properly -->
+			
+			<div class="cart-row"> 
+				<div class="cart-item cart-column">
+					<img class="cart-item-image" src="img/bbq-crunch.jpg">
+					<span class="cart-item-title">Bbq crunch</span>
+				</div>
+				<span class="cart-price cart-column">£1.99</span>
+				<div class="cart-quantity cart-column"> 
+					<input class="cart-quantity-input" type="number" value="1">
+					<button class="btn btn-danger" type="button">REMOVE</button>
+				</div>
+			</div> <!-- cart-row -->
+			<div class="cart-row"> 
+				<div class="cart-item cart-column">
+					<img class="cart-item-image" src="img/graze_punchy_protein.jpg">
+					<span class="cart-item-title">punchy protein</span>
+				</div>
+				<span class="cart-price cart-column">£1.99</span>
+				<div class="cart-quantity cart-column"> 
+					<input class="cart-quantity-input" type="number" value="1">
+					<button class="btn btn-danger" type="button">REMOVE</button>
+				</div>
+			</div> <!-- cart-row -->
+			
+			<!-- end -->
+			</div> <!-- cart-items -->
+			
 			<div class="cart-total">
 				<strong class="cart-total-title">Total</strong>
 				<span class="cart-total-price">$0</span>
 			</div>
 			<button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
 		</section>
-		<script src="js/main.js"></script>
+		<!--script src="js/main.js"></script-->
 		<script src="js/responsive.js"></script>
 	</body>
 </html>
