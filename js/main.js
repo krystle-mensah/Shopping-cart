@@ -10,13 +10,12 @@ if (document.readyState == 'loading') {
   ready();
 }
 
-function ready() {
-  // removeCartItemButtons set to all elements with the class of "btn-danger" 
+function ready() { 
   var removeCartItemButtons = document.getElementsByClassName("btn-danger"); //console.log(removeCartItemButtons);
   
   //For every removeCartItemButtons length loop through them with var i.  
   for (var i = 0; i < removeCartItemButtons.length; i++){
-    // Next save whatever element class is pressed in variable. 
+    // Next save element class is pressed in variable. 
     var button = removeCartItemButtons[i]
     
     // Next we need to set up a click event on that variable. Just the click motion.
@@ -36,29 +35,46 @@ function ready() {
   }
   
   var addToCartButtons = document.getElementsByClassName('shop-item-button');
-  // For all addToCartButtons, loop through how many there them with i variable.
+  // For all addToCartButtons, loop through how many there is with i variable.
 
   for (var i = 0; i < addToCartButtons.length; i++) {
     // Inside the loop we need to grap on to one element and hold it in a variable.
     
     var button = addToCartButtons[i];
-    // Then we add a 'click' event to that variable. So when it is clicked the event runs and the function addToCartClicked.
+    // Then we add a 'click' event to that variable. Because we wont to do something when we click on it. 
+    // So when it is clicked the event runs and the function addToCartClicked.
    
     button.addEventListener('click', addToCartClicked) 
   }
+
+  document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked);
 }
+
+function purchaseClicked(event) {
+  // what we wont to do inside of this function is ALERT the user about there purchase
+  alert('Thank you for your purchase');
+  // Then we wont to delete all items in the cart
+
+  var cartItems = document.getElementsByClassName('cart-items')[0];
+  while(cartItems.hasChildNodes()){
+    cartItems.removeChild(cartItems.firstChild)
+  }
+  updateCartTotal();
+}
+
 function removeCartItem(event) {
   // This event object has a property called target.
   // The event.target is esentailly what ever button we clicked on.
   // Next we hold that in a varible called buttonClicked
   // What we wont to do is get that cart row that button is inside.     
   var buttonClicked = event.target
-  // we take our buttonClicked and the divison is is in <div class="cart-quantity cart-column">.
-  // Then we grap that the hole row element <div class="cart-row"> then the remove function. 
+  // we take our buttonClicked and the divison is in <div class="cart-quantity cart-column">.
+  // Then we grap the hole row element <div class="cart-row"> then the remove() function. 
   buttonClicked.parentElement.parentElement.remove()
   // Now we call updateCartTotal 
   updateCartTotal();
 }
+
 // What we wont to do when our quantity is changed. 
 function quantityChanged(event) {
   // What we wont to do when our quantity has changed
@@ -80,17 +96,18 @@ function quantityChanged(event) {
 function addToCartClicked(event) {
   var button = event.target
 
+  // When we click on the button we wont to add some elements to.
+
   // First create a variable called shopItem. 
   // And the shop-item-button class which is inside the shop-item-details Div element. 
   // Set it to the variable button along with.  
   var shopItem = button.parentElement.parentElement
   
   var title = shopItem.getElementsByClassName('shop-item-title')[0].innerText //console.log(title);
-  var price = shopItem.getElementsByClassName('shop-item-price')[0].innerText
-  console.log(price);
+  var price = shopItem.getElementsByClassName('shop-item-price')[0].innerText // console.log(price);
   var imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src
-  
   addItemToCart(title, price, imageSrc)
+  updateCartTotal();
 }
 
 function addItemToCart(title, price, imageSrc) {
@@ -99,30 +116,34 @@ function addItemToCart(title, price, imageSrc) {
   // First we store cartRow into a variable. Then we set it to a new element which we will add to our html later. 
   
   var cartRow = document.createElement('div');
-  // Next we wont to add this new element to the "cart-items" class. The first array
-  
   cartRow.classList.add('cart-row');
-  // We hold the "cart-items" class element in a variable called cartItems. The first array. 
-
-
+  // Next we wont to add this new element to the "cart-items" class.
   var cartItems = document.getElementsByClassName('cart-items')[0];
+  var cartItemNames = cartItems.getElementsByClassName('cart-item-title');
+  for(var i = 0; i < cartItemNames.length; i++ ) {
+    if(cartItemNames[i].innerText == title){
+      alert('This item has already been added mate')
+      return; 
+    }
+  }
   // This is the content of our cartRow variable. 
   
   // First we store the contents in a variable and set it to a string. 
-  // var cartRowContents = ` 
-  //   <div class="cart-item cart-column">
-  //     <img class="cart-item-image" src="img/bbq-crunch.jpg"></img>
-  //     <span class="cart-item-title">Bbq crunch</span>
-  //   </div>
-  //   <span class="cart-price cart-column">£1.99</span>
-  //   <div class="cart-quantity cart-column"> 
-  //     <input class="cart-quantity-input" type="number" value="1"></input>
-  //     <button class="btn btn-danger" type="button">REMOVE</button>
-  //   </div> `
-  //cartRow.innerHTML = cartRowContents 
-
+  var cartRowContents = ` 
+    <div class="cart-item cart-column">
+      <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
+      <span class="cart-item-title">${title}</span>
+    </div>
+    <span class="cart-price cart-column">${price}</span>
+    <div class="cart-quantity cart-column"> 
+      <input class="cart-quantity-input" type="number" value="1"></input>
+      <button class="btn btn-danger" type="button">REMOVE</button>
+    </div> `
+  cartRow.innerHTML = cartRowContents 
   // Next we add the cartItems variable to the CartRow variable
   cartItems.append(cartRow);
+  cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem);
+  cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged);
 }
 
 
@@ -137,7 +158,7 @@ function updateCartTotal() {
   var cartItemContainer = document.getElementsByClassName('cart-items')[0] //console.log(cartItemContainer);
   // Inside of that cartItemContainer we want to get element by class name 'cart-row'
   // Using getElementsByClassName on an object cartItemContainer well only get the elements inside of that object that 
-  // have this differant class then we set it to a varible 'cartRows'   
+  // has this differant class then we set it to a varible 'cartRows'   
   var cartRows = cartItemContainer.getElementsByClassName('cart-row') //console.log(cartRows);
   var total = 0;
   for (var i = 0; i < cartRows.length; i++){
