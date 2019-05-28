@@ -44,7 +44,8 @@ function ready() {
     // Then we add a 'click' event to that variable. Because we wont to do something when we click on it. 
     // So when it is clicked the event runs and the function addToCartClicked.
    
-    button.addEventListener('click', addToCartClicked) 
+    button.addEventListener('click', addToCartClicked)
+    button.addEventListener('click', saveCart) // console.log(saveCart);   
   }
 
   document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked);
@@ -73,6 +74,7 @@ function removeCartItem(event) {
   buttonClicked.parentElement.parentElement.remove()
   // Now we call updateCartTotal 
   updateCartTotal();
+  //saveCart();
 }
 
 // What we wont to do when our quantity is changed. 
@@ -108,6 +110,7 @@ function addToCartClicked(event) {
   var imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src
   addItemToCart(title, price, imageSrc)
   updateCartTotal();
+  //saveCart();
 }
 
 function addItemToCart(title, price, imageSrc) {
@@ -144,6 +147,7 @@ function addItemToCart(title, price, imageSrc) {
   cartItems.append(cartRow);
   cartRow.getElementsByClassName('btn-danger')[0].addEventListener('click', removeCartItem);
   cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged);
+  //saveCart()
 }
 
 
@@ -174,6 +178,21 @@ function updateCartTotal() {
   total = Math.round(total * 100) / 100 
   document.getElementsByClassName('cart-total-price')[0].innerText = '£' + total 
 }
+
+
+function saveCart(event) {
+  // JSON stands for javascript object notation.
+  
+  var shoppingCart = [];
+
+  localStorage.setItem('items', JSON.stringify(shoppingCart)); 
+  var data = JSON.parse(localStorage.setItem('items'))
+  
+}
+
+//localStorage.setItem('user', 'krystle');
+//localStorage.clear();
+//localStorage.removeItem('key');
 
 
 
